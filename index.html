@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="kk-Arab" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1,user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>قازاق شاتى</title>
+  <style>
+    :root{--bg:#f6f7fb;--card:#fff;--text:#172033;--muted:#5f687a;--line:#e7eaf1;--user:#176bff;--bot:#fff;--danger:#d83a52;--safe-top:env(safe-area-inset-top);--safe-bottom:env(safe-area-inset-bottom)}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Naskh Arabic","Noto Sans Arabic","Geeza Pro",Arial,sans-serif}
+    body{position:fixed;inset:0}.app{height:100%;display:flex;flex-direction:column;max-width:760px;margin:0 auto;background:linear-gradient(180deg,#fbfcff 0%,#f4f6fb 100%)}
+    header{padding:calc(10px + var(--safe-top)) 12px 10px;background:rgba(255,255,255,.92);border-bottom:1px solid var(--line);backdrop-filter:blur(16px);display:flex;align-items:center;gap:8px;direction:ltr;z-index:2}
+    .title{flex:1;text-align:center;direction:rtl;font-weight:800;font-size:20px;letter-spacing:.2px}.iconbtn{border:1px solid var(--line);background:#fff;color:var(--text);border-radius:14px;height:40px;min-width:44px;padding:0 12px;font-size:18px;font-weight:700}.iconbtn:active,.send:active{transform:scale(.97)}
+    main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 12px 12px;scroll-behavior:smooth}.empty{min-height:70%;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);line-height:1.8}.empty .big{font-size:52px;margin-bottom:8px}.empty b{display:block;color:#3d4658;font-size:19px}.msg{display:flex;margin:9px 0;direction:ltr}.msg.user{justify-content:flex-start}.msg.assistant{justify-content:flex-end}.bubble{max-width:82%;padding:11px 13px;border-radius:18px;line-height:1.65;font-size:17px;white-space:pre-wrap;word-break:break-word;box-shadow:0 8px 22px rgba(27,38,69,.06);direction:rtl;text-align:right}.user .bubble{background:var(--user);color:white;border-bottom-left-radius:6px}.assistant .bubble{background:var(--bot);border:1px solid var(--line);border-bottom-right-radius:6px}.typing{color:var(--muted);font-size:14px;margin:8px 4px;text-align:right}.composer{padding:10px 10px calc(10px + var(--safe-bottom));background:rgba(255,255,255,.95);border-top:1px solid var(--line);display:flex;gap:8px;align-items:flex-end;direction:ltr}.inputWrap{flex:1;background:#f3f5fa;border:1px solid #e1e5ef;border-radius:18px;padding:9px 12px}textarea{width:100%;min-height:26px;max-height:120px;border:0;outline:0;resize:none;background:transparent;color:var(--text);font:17px/1.55 inherit;direction:rtl;text-align:right}textarea::placeholder{color:#9aa3b5}.send{height:46px;min-width:58px;border:0;border-radius:17px;background:var(--user);color:white;font-size:18px;font-weight:800}.send:disabled{opacity:.55}.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(9,14,26,.42);padding:20px;z-index:10}.modal.show{display:flex}.panel{width:100%;max-width:430px;background:#fff;border-radius:24px;padding:18px;direction:rtl;box-shadow:0 20px 60px rgba(9,14,26,.25)}.panel h2{margin:0 0 8px;font-size:20px}.panel p{margin:0 0 14px;color:var(--muted);font-size:14px;line-height:1.7}.keyInput{width:100%;border:1px solid var(--line);background:#f8f9fc;border-radius:16px;padding:12px;font:15px/1.4 ui-monospace,Menlo,Consolas,monospace;direction:ltr;text-align:left}.actions{display:flex;gap:8px;margin-top:14px;direction:ltr}.btn{flex:1;border:0;border-radius:14px;padding:12px;font-weight:800;background:#eef2fa;color:#263147}.primary{background:var(--user);color:#fff}.danger{color:#fff;background:var(--danger)}.toast{position:fixed;left:50%;bottom:calc(78px + var(--safe-bottom));transform:translateX(-50%);background:rgba(20,25,38,.9);color:#fff;border-radius:999px;padding:10px 14px;max-width:86%;font-size:14px;display:none;z-index:20;direction:rtl;text-align:center}.toast.show{display:block}@media (prefers-color-scheme:dark){:root{--bg:#0f1320;--card:#171d2d;--text:#eef2ff;--muted:#9ba6bd;--line:#2a3347;--bot:#171d2d}.app{background:#0f1320}header,.composer,.panel{background:rgba(23,29,45,.94)}.iconbtn{background:#171d2d;color:var(--text)}.inputWrap,.keyInput{background:#111827;color:var(--text);border-color:#30394d}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header><button id="clearBtn" class="iconbtn" title="تازالاۋ">🗑</button><div class="title">قازاق شاتى</div><button id="settingsBtn" class="iconbtn" title="باپتاۋ">⚙️</button></header>
+  <main id="chat"></main>
+  <div id="typing" class="typing" hidden>جەۋاپ كۇتۋدە...</div>
+  <form id="form" class="composer"><div class="inputWrap"><textarea id="input" rows="1" placeholder="قازاقشا سۇراق قويىڭىز"></textarea></div><button id="sendBtn" class="send" type="submit">➤</button></form>
+</div>
+<div id="modal" class="modal"><div class="panel"><h2>DeepSeek API Key</h2><p>بىرىنشى رەت API Key كىرگىزىڭىز. ول وسي قۇرالعادا ساقتالادى، كىيىن وزگەرتۋگە بولادى.</p><input id="keyInput" class="keyInput" type="password" autocomplete="off" placeholder="sk-..."><div class="actions"><button id="cancelKey" class="btn" type="button">بولدىرماۋ</button><button id="saveKey" class="btn primary" type="button">ساقتاۋ</button></div></div></div>
+<div id="toast" class="toast"></div>
+<script>
+(function(){'use strict';
+const API='https://api.deepseek.com/chat/completions',MODEL='deepseek-chat',K_KEY='deepseek_api_key',K_HIST='chat_history_v1';
+const systemPrompt='Сен қазақ тілінде сөйлейтін көмекшісің. Пайдаланушының сұрағына тек қазақ тілінде, кириллица әліпбиімен, қысқа және нақты жауап бер. Артық түсіндірмелерден, ағылшын не орыс сөздерінен аулақ бол. Тізім қажет болғанда 1., 2., 3. деп нөмірле.';
+const multi={'يا':'я','يۋ':'ю','يو':'ё','شش':'щ','تس':'ц'};
+const a2c={'ا':'а','ٵ':'ә','ب':'б','ۆ':'в','گ':'г','ع':'ғ','د':'д','ە':'е','ج':'ж','ز':'з','ٸ':'і','ي':'й','ك':'к','ک':'к','ق':'қ','ل':'л','م':'м','ن':'н','ڭ':'ң','و':'о','ٶ':'ө','پ':'п','ر':'р','س':'с','ت':'т','ۋ':'у','ۇ':'ұ','ٷ':'ү','ف':'ф','ح':'х','ھ':'һ','ه':'һ','چ':'ч','ش':'ш','ى':'ы','،':',','؟':'?','؛':';','ـ':''};
+const c2a={'а':'ا','ә':'ٵ','б':'ب','в':'ۆ','г':'گ','ғ':'ع','д':'د','е':'ە','ё':'يو','ж':'ج','з':'ز','и':'ي','й':'ي','к':'ك','қ':'ق','л':'ل','м':'م','н':'ن','ң':'ڭ','о':'و','ө':'ٶ','п':'پ','р':'ر','с':'س','т':'ت','у':'ۋ','ұ':'ۇ','ү':'ٷ','ф':'ف','х':'ح','һ':'ھ','ц':'تس','ч':'چ','ш':'ش','щ':'شش','ъ':'','ы':'ى','і':'ٸ','ь':'','э':'ە','ю':'يۋ','я':'يا',',':'،','?':'؟',';':'؛'};
+function arabicToCyrillic(s){let out='',i=0;while(i<s.length){let ok=false;for(const len of [3,2]){const ch=s.slice(i,i+len);if(multi[ch]){out+=multi[ch];i+=len;ok=true;break}}if(!ok){const ch=s[i];out+=(a2c[ch]??ch);i++}}return out}
+function cyrillicToArabic(s){let out='';for(const ch of s){out+=(c2a[ch.toLowerCase()]??ch)}return out}
+const $=id=>document.getElementById(id),chat=$('chat'),input=$('input'),form=$('form'),sendBtn=$('sendBtn'),typing=$('typing'),modal=$('modal'),keyInput=$('keyInput'),toast=$('toast');let messages=[];
+function load(){try{messages=JSON.parse(localStorage.getItem(K_HIST)||'[]')}catch(e){messages=[]}render();if(!getKey())openSettings(false)}
+function save(){localStorage.setItem(K_HIST,JSON.stringify(messages))}function getKey(){return(localStorage.getItem(K_KEY)||'').trim()}
+function toastMsg(t){toast.textContent=t;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),2400)}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function render(){chat.innerHTML=messages.length?messages.map(m=>`<div class="msg ${m.role}"><div class="bubble">${esc(m.arabic)}</div></div>`).join(''):'<div class="empty"><div><div class="big">💬</div><b>قازاقشا سۇراق قويىڭىز</b><span>API Key كىرگىزىپ، DeepSeek پەن سويلىسىڭىز بولادى.</span></div></div>';setTimeout(()=>{chat.scrollTop=chat.scrollHeight},0)}
+function autosize(){input.style.height='auto';input.style.height=Math.min(input.scrollHeight,120)+'px'}
+function openSettings(closable=true){keyInput.value=getKey();modal.classList.add('show');$('cancelKey').style.display=closable?'block':'none';setTimeout(()=>keyInput.focus(),120)}
+function closeSettings(){modal.classList.remove('show')}
+async function send(arabic){const key=getKey();if(!key){toastMsg('الدىمەن API Key كىرگىزىڭىز');openSettings(false);return}const text=arabic.trim();if(!text)return;const cyr=arabicToCyrillic(text);messages.push({role:'user',arabic:text,cyrillic:cyr,ts:Date.now()});save();render();input.value='';autosize();typing.hidden=false;sendBtn.disabled=true;
+try{const history=messages.map(m=>({role:m.role==='user'?'user':'assistant',content:m.cyrillic}));const resp=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json;charset=utf-8','Authorization':'Bearer '+key},body:JSON.stringify({model:MODEL,stream:false,temperature:.7,max_tokens:512,messages:[{role:'system',content:systemPrompt},...history]})});const raw=await resp.text();if(!resp.ok)throw new Error('HTTP '+resp.status+': '+raw);const data=JSON.parse(raw);const reply=(data.choices&&data.choices[0]&&data.choices[0].message&&data.choices[0].message.content||'').trim();if(!reply)throw new Error('Empty response');messages.push({role:'assistant',arabic:cyrillicToArabic(reply),cyrillic:reply,ts:Date.now()});save();render()}catch(e){toastMsg('قاتە: '+(e.message||e));}finally{typing.hidden=true;sendBtn.disabled=false;input.focus()}}
+form.addEventListener('submit',e=>{e.preventDefault();send(input.value)});input.addEventListener('input',autosize);input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();form.requestSubmit()}});
+$('settingsBtn').onclick=()=>openSettings(true);$('saveKey').onclick=()=>{const v=keyInput.value.trim();if(!v){toastMsg('API Key بوس بولمايدى');return}localStorage.setItem(K_KEY,v);closeSettings();toastMsg('ساقتالدى')};$('cancelKey').onclick=closeSettings;
+$('clearBtn').onclick=()=>{if(!messages.length)return;if(confirm('بارلىق حابارلامالار وشىرىلەدى. جالعاستىرۋ؟')){messages=[];localStorage.removeItem(K_HIST);render();toastMsg('تازالاندى')}};
+window.addEventListener('resize',()=>setTimeout(()=>chat.scrollTop=chat.scrollHeight,100));load();
+})();
+</script>
+</body>
+</html>
