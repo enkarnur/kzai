@@ -6,7 +6,7 @@ workflows:
     scripts:
       - name: Ensure Android scaffold exists
         script: |
-          if [ ! -f android/app/build.gradle ] && [ ! -f android/app/build.gradle.kts ]; then
+          if [ ! -f android/gradlew ] || [ ! -f android/app/build.gradle ]; then
             flutter create --platforms=android --org com.qazaqchat --project-name kazakh_chat .
           fi
       - name: Install dependencies

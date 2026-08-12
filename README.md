@@ -15,7 +15,14 @@ kazakh_chat_app/
 ├── pubspec.yaml              # Flutter 依赖
 ├── analysis_options.yaml
 ├── android/
-│   └── app/src/main/AndroidManifest.xml   # 已配置网络 + 麦克风权限 + queries
+│   ├── build.gradle                       # Android Gradle 根配置
+│   ├── settings.gradle                    # Flutter/AGP/Kotlin 插件配置
+│   └── app/
+│       ├── build.gradle                   # compileSdk 35 / minSdk 21
+│       └── src/main/
+│           ├── AndroidManifest.xml        # v2 embedding + 权限 + queries
+│           ├── kotlin/.../MainActivity.kt # v2 FlutterActivity
+│           └── res/                       # 启动主题资源
 ├── lib/
 │   ├── main.dart                          # App 入口 + 首次启动跳设置
 │   ├── models/message.dart                # 聊天消息模型
@@ -32,10 +39,8 @@ kazakh_chat_app/
 └── README.md
 ```
 
-> ⚠️ 本包**只包含核心源码**（Dart + AndroidManifest），Flutter 的
-> Android 脚手架（Gradle、MainActivity、图标、启动屏等）会在你第一次运行
-> `flutter create --platforms=android .` 时自动生成，**不会覆盖本仓库里已存在的
-> AndroidManifest.xml**。这样做能保证跟你本地的 Flutter 版本完全兼容。
+> Android 工程已包含 Flutter Android v2 embedding 所需的 Gradle 配置、MainActivity 和启动主题资源。
+> Codemagic 如检测到缺少 Gradle Wrapper，仍会先执行 `flutter create --platforms=android --org com.qazaqchat --project-name kazakh_chat .` 补齐 wrapper 等模板文件。
 
 ## 环境要求
 
@@ -56,7 +61,7 @@ kazakh_chat_app/
 cd kazakh_chat_app
 ```
 
-**第一步**：让 Flutter 补齐 Android 平台脚手架（保留我们已经写好的 AndroidManifest.xml）：
+**第一步**：如果本地缺少 Android Gradle Wrapper，可让 Flutter 补齐 Android 平台脚手架（保留现有 v2 embedding 配置）：
 
 ```bash
 flutter create \
