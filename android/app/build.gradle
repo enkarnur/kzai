@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace "com.qazaqchat.kazakh_chat"
-    compileSdkVersion 35
+    compileSdkVersion 36
 
     defaultConfig {
         applicationId "com.qazaqchat.kazakh_chat"
