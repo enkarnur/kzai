@@ -1,6 +1,7 @@
 workflows:
   android-release:
-    name: android-release
+    name: Android APK Release
+    instance_type: linux_x2
     environment:
       flutter: stable
     scripts:
@@ -11,7 +12,7 @@ workflows:
           fi
       - name: Install dependencies
         script: flutter pub get
-      - name: Build APK
+      - name: Build Android APK
         script: flutter build apk --release
     artifacts:
       - build/app/outputs/flutter-apk/*.apk
